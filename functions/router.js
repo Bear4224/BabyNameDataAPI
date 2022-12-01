@@ -1,9 +1,7 @@
 const router = require('express').Router();
-const test = require('./routes/test');
 const { byName, byYear } = require('us-baby-names');
+const test = require('./routes/test');
 
-// Transform the data object elements into an
-// HTML table
 // Transform the data object elements into an
 // HTML table
 const formatToHTML = function(dataArr) {

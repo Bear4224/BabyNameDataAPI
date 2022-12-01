@@ -1,6 +1,5 @@
 const functions = require("firebase-functions");
 const server = require('./server');
-const { byName, byYear } = require('us-baby-names');
 const bnd361642 = functions.runWith({ memory: "2GB", timeoutSeconds: 60 })
                      .https
                      .onRequest(server);
