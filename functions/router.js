@@ -47,9 +47,38 @@ router.get('/baby-name/:name', function(req, res) {
 })
 
 // Path 2: /baby-name/<name>/<year>
-router.get('baby-name/:name/:year', function(req, res) {
-  let data = byName[fixName(req.params.name)];
-  data = data.filter(year == req.params.year);
+router.get('/baby-name/:name/:year', function(req, res) {
+  let data = byName[fixName(req.params.name)].filter(entry => entry.year == req.params.year);
+  res.send(formatToHTML(data));
+})
+
+// Path 3: /baby-name/<name>/after/<afterYear>
+router.get('/baby-name/:name/after/:afterYear', function(req, res) {
+  let data = byName[fixName(req.params.name)].filter(entry => entry.year > req.params.afterYear);
+  res.send(formatToHTML(data));
+})
+
+// Path 4: /baby-name/<name>/before/<beforeYear>
+router.get('/baby-name/:name/before/:beforeYear', function(req, res) {
+  let data = byName[fixName(req.params.name)].filter(entry => entry.year < req.params.beforeYear);
+  res.send(formatToHTML(data));
+})
+
+// Path 5: /baby-year/<year>
+router.get('/baby-year/:year', function(req, res) {
+  let data = byYear[req.params.year];
+  res.send(formatToHTML(data));
+})
+
+// Path 6: /baby-year/<year>/<name>
+router.get('/baby-year/:year/:name', function(req, res) {
+  let data = byYear[req.params.year].filter(entry => fixName(entry.name) == fixName(req.params.name));
+  res.send(formatToHTML(data));
+})
+
+// Path 7: /baby-year-start/<year>/<letter>
+router.get('/baby-year-start/:year/:letter', function(req, res) {
+  let data = byYear[req.params.year].filter(entry => entry.name.charAt(0) == fixName(req.params.letter).charAt(0));
   res.send(formatToHTML(data));
 })
 
