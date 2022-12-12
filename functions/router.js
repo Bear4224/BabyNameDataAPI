@@ -82,4 +82,10 @@ router.get('/baby-year-start/:year/:letter', function(req, res) {
   res.send(formatToHTML(data));
 })
 
+// Path 8: /baby-year-end/<year>/<letter>
+router.get('/baby-year-end/:year/:letter', function(req, res) {
+  let data = byYear[req.params.year].filter(entry => entry.name.slice(-1) == req.params.letter.toLowerCase().charAt(0));
+  res.send(formatToHTML(data));
+})
+
 module.exports = router;
